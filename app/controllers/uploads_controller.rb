@@ -17,11 +17,10 @@ class UploadsController < ApplicationController
   
   def create
       @upload = Upload.new(params[:upload])
-      if @upload.save
+      if @upload.save!
         flash[:notice] = "Successfully created upload."
         respond_to do |format|
           format.html {redirect_to uploads_path}
-          format.json {render :json => { :result => 'success', :upload => upload_path(@upload) } }
         end
       else
         render :action => 'new'
